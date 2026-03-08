@@ -25,8 +25,8 @@ module.exports = {
 			if (snapshot.empty) {
 				return next(
 					ApiError.badRequest(
-						"The documents you were looking for do not exist"
-					)
+						"The documents you were looking for do not exist",
+					),
 				);
 			}
 
@@ -52,8 +52,8 @@ module.exports = {
 			return next(
 				ApiError.internal(
 					"The items selected could not be found",
-					error
-				)
+					error,
+				),
 			);
 		}
 	},
@@ -75,8 +75,8 @@ module.exports = {
 			if (snapshot.empty) {
 				return next(
 					ApiError.badRequest(
-						"The documents you were looking for do not exist"
-					)
+						"The documents you were looking for do not exist",
+					),
 				);
 			}
 
@@ -102,8 +102,8 @@ module.exports = {
 			return next(
 				ApiError.internal(
 					"The items selected could not be found",
-					error
-				)
+					error,
+				),
 			);
 		}
 	},
@@ -122,8 +122,8 @@ module.exports = {
 			return next(
 				ApiError.internal(
 					"An error occurred in uploading the image to storage",
-					error
-				)
+					error,
+				),
 			);
 		}
 
@@ -140,15 +140,14 @@ module.exports = {
 				isAvailable: req.body.isAvailable === "true",
 				image: downloadUrl,
 			});
-			console.log(`Added product ID: ${response.id}`);
 
 			res.send(response.id);
 		} catch (error) {
 			return next(
 				ApiError.internal(
 					"Your request could not be saved at this time",
-					error
-				)
+					error,
+				),
 			);
 		}
 	},
@@ -164,8 +163,8 @@ module.exports = {
 			if (!doc.exists) {
 				return next(
 					ApiError.badRequest(
-						"The item you were looking for does not exist"
-					)
+						"The item you were looking for does not exist",
+					),
 				);
 			}
 
@@ -174,22 +173,18 @@ module.exports = {
 			return next(
 				ApiError.internal(
 					"Your request could not be processed at this time",
-					error
-				)
+					error,
+				),
 			);
 		}
 	},
 
 	async putProductById(req, res, next) {
 		let downloadUrl;
-		console.log("req.body");
-		console.log(req.body);
 
 		try {
 			// Overwriting the old image with new image
 			if (req.files) {
-				console.log("req.files");
-				console.log(req.files);
 				// Upload the new image
 				const filename = res.locals.filename;
 
@@ -197,26 +192,22 @@ module.exports = {
 				downloadUrl = uploadResult.data.url;
 				// Delete the old image
 				if (req.body.oldImageId) {
-					console.log(
-						`Deleting old image in storage: ${req.body.oldImageId}`
-					);
 					const deleteResult = await cloudinaryDeleteImage(
-						req.body.oldImageId
+						req.body.oldImageId,
 					);
 				}
 			} else if (req.body.image === "undefined") {
 				next(ApiError.badRequest("You must provide an image"));
 			} else {
 				// Image is not changed
-				console.log("No change to image in db");
 				downloadUrl = req.body.image;
 			}
 		} catch (error) {
 			return next(
 				ApiError.internal(
 					"An error occurred in saving image to storage",
-					error
-				)
+					error,
+				),
 			);
 		}
 
@@ -239,8 +230,8 @@ module.exports = {
 			return next(
 				ApiError.internal(
 					"Your request could not be saved at this time",
-					error
-				)
+					error,
+				),
 			);
 		}
 	},
@@ -255,8 +246,8 @@ module.exports = {
 			if (!doc.exists) {
 				return next(
 					ApiError.badRequest(
-						"The item you were looking for does not exist"
-					)
+						"The item you were looking for does not exist",
+					),
 				);
 			}
 
@@ -275,8 +266,8 @@ module.exports = {
 			return next(
 				ApiError.internal(
 					"Your request could not be processed at this time",
-					error
-				)
+					error,
+				),
 			);
 		}
 	},

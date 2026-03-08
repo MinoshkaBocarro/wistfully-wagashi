@@ -11,12 +11,10 @@ const auth = (req, res, next) => {
 
 	// Token exists but need to check if expired or invalid
 	else token = token.substring(7, token.length);
-	console.log(`DEBUG: Returned token of ${token}`);
 
 	try {
 		const decoded = jwt.verify(token, config.authentication.jwtSecret);
 		req.user = decoded;
-		console.log(`User is verified ${req.user.username}`);
 		next();
 	} catch (error) {
 		return next(ApiError.denyAccess("Invalid token"));

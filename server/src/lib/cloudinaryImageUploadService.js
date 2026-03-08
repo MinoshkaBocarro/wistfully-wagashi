@@ -23,7 +23,7 @@ module.exports = {
 			// Request upload to cloudinary service
 			const uploadResult = await cloudUploader.upload(
 				serverFilePath,
-				uploadOptions
+				uploadOptions,
 			);
 
 			// Delete temporary file in server-side uploads
@@ -72,13 +72,11 @@ module.exports = {
 
 			// Join all parts after the version (index 1) to reconstruct the full public_id
 			const publicIdWithExtension = parts.slice(1).join("/");
-			console.log(`publicId with extension: ${publicIdWithExtension}`);
 
 			// Remove file extension by finding the last dot
 			const lastDotIndex = publicIdWithExtension.lastIndexOf(".");
 			const publicId = publicIdWithExtension.substring(0, lastDotIndex);
 
-			console.log(`publicId is: ${publicId}`);
 			return publicId;
 		} catch (error) {
 			console.error("Error extracting public_id from URL:", error);

@@ -16,14 +16,13 @@ const fileServerUpload = (req, res, next) => {
 		const uploadPath = path.join(
 			__dirname,
 			"../../public/uploads/",
-			filename
+			filename,
 		);
 
 		// Move file to server storage
 		file.mv(uploadPath)
 			.then(() => {
 				// Set filename variable on req object and pass to next middleware
-				console.log(`Server Upload Successful: ${uploadPath}`);
 				res.locals.filename = filename;
 				next();
 			})
@@ -32,8 +31,8 @@ const fileServerUpload = (req, res, next) => {
 					return next(
 						ApiError.internal(
 							"Your file request could not be processed at this time",
-							error
-						)
+							error,
+						),
 					);
 			});
 	} else {

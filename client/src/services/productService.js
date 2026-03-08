@@ -24,8 +24,6 @@ function getById(id) {
 // PUT PRODUCT
 function put(id, data, oldImageId) {
 	const formData = prepareFormData(data, oldImageId);
-	console.log("formData");
-	console.log(data);
 	return api.put("/api/products/" + id, formData, formConfig);
 }
 

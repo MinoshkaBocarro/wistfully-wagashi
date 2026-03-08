@@ -60,15 +60,11 @@ function AddProductPage() {
 		setLoading(true);
 		try {
 			const response = await productService.post(productData);
-			console.log("productData");
-			console.log(productData);
-			console.log("response");
-			console.log(response);
 			navigate("/store/products");
 		} catch (error) {
 			window.scroll({ top: 0, left: 0, behavior: "smooth" });
 			setTimeout(() => {
-				setLoading(false), 1000;
+				(setLoading(false), 1000);
 			});
 		}
 	};

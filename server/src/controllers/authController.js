@@ -19,7 +19,7 @@ module.exports = {
 			// 400 Error: Check for no documents
 			if (snapshot.empty) {
 				return next(
-					ApiError.badRequest("No users exist for this collection")
+					ApiError.badRequest("No users exist for this collection"),
 				);
 			}
 
@@ -37,7 +37,7 @@ module.exports = {
 			res.send(users);
 		} catch (error) {
 			return next(
-				ApiError.internal("The users could not be found", error)
+				ApiError.internal("The users could not be found", error),
 			);
 		}
 	},
@@ -63,7 +63,6 @@ module.exports = {
 				password: await hashPassword(password),
 				isAdmin: false,
 			});
-			console.log(`User: ${response.id} registered`);
 
 			// Structure the data payload to be saved within the token
 			const userJSON = await userDetailsToJSON(response.id);
@@ -74,8 +73,8 @@ module.exports = {
 			return next(
 				ApiError.internal(
 					"Your profile could not be registered at this time",
-					error
-				)
+					error,
+				),
 			);
 		}
 	},
@@ -92,29 +91,27 @@ module.exports = {
 			return next(
 				// TODO: Remove debug
 				ApiError.badRequest(
-					"Incorrect email or password (DEBUG - email)"
-				)
+					"Incorrect email or password (DEBUG - email)",
+				),
 			);
 		}
 
 		// Check that the password matches the db user pwd
 		const passwordMatch = await comparePassword(
 			password,
-			userMatch[0].password
+			userMatch[0].password,
 		);
 
 		if (!passwordMatch) {
 			return next(
 				// TODO: Remove Deubug
 				ApiError.badRequest(
-					"Incorrect email or password (DEBUG - password)"
-				)
+					"Incorrect email or password (DEBUG - password)",
+				),
 			);
 		}
 
 		// Dealing with response and minting token
-		console.log(`Success - user created: ${userMatch[0].id}`);
-
 		// TODO: refactor
 		const userJSON = await userDetailsToJSON(userMatch[0].id);
 

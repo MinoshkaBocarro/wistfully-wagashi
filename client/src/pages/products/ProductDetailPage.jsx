@@ -58,7 +58,6 @@ function productDetailPage() {
 			// Update state
 			setProductData({ ...productData, ...response.data });
 		} catch (error) {
-			console.log(error);
 			setError(true);
 		}
 	}
@@ -68,10 +67,7 @@ function productDetailPage() {
 		setLoading(true);
 		try {
 			const response = await ProductService.del(id);
-			console.log(response);
-
 			// on success redirect
-			console.log("success");
 			setLoading(false);
 			navigate("/store/products");
 		} catch (error) {

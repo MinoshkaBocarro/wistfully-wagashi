@@ -8,13 +8,11 @@ function getFileIdFromUrl(secureUrl) {
 
 	// Join all parts after the version (index 1) to reconstruct the full public_id
 	const publicIdWithExtension = parts.slice(1).join("/");
-	console.log(`publicId with extension: ${publicIdWithExtension}`);
 
 	// Remove file extension by finding the last dot
 	const lastDotIndex = publicIdWithExtension.lastIndexOf(".");
 	const publicId = publicIdWithExtension.substring(0, lastDotIndex);
 
-	console.log(`publicId is: ${publicId}`);
 	return publicId;
 }
 

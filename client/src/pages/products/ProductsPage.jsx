@@ -45,7 +45,6 @@ function ProductsPage() {
 		try {
 			const response = await productService.getAll();
 			const data = await response.data;
-			console.log(data);
 			setProducts(data);
 		} catch (error) {
 			setError(true);

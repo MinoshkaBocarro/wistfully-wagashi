@@ -49,7 +49,5 @@ app.use((req, res, next) => {
 // 400s and 500s
 app.use(apiErrorHandler);
 dbPing.then(() => {
-	app.listen(config.port, () =>
-		console.log(`server is running on port: ${config.port}`)
-	);
+	app.listen(config.port);
 });

@@ -20,8 +20,6 @@ function Login() {
 	const location = useLocation();
 
 	useEffect(() => {
-		console.log("location.state");
-		console.log(location.state?.showNotLoggedInToast);
 		// Double pop up only in dev mode
 		if (location.state && location.state.showNotLoggedInToast) {
 			toast.warn("You are not logged in");

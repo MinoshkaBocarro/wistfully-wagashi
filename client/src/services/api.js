@@ -12,13 +12,10 @@ api.interceptors.response.use(null, (error) => {
 		error.response.status >= 400 &&
 		error.response.status &&
 		error.response.status < 500;
-	console.log(expectedError);
 
 	if (!expectedError) {
-		console.log(`Interceptors - ${error}`);
 		toast.error("Unexpected Error");
 	} else {
-		console.log(`${error}`);
 		toast.warn(`${error?.response.data}`);
 	}
 	return Promise.reject(error);

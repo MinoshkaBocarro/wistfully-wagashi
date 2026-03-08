@@ -74,14 +74,13 @@ function EditProductPage() {
 
 	async function fetchProduct() {
 		try {
-			console.log(id);
 			const response = await productService.getById(id);
 			// Update state
 			setProductData({ ...productData, ...response.data });
 
 			// Clone the image url as oldImage
 			if (!response.data.image) {
-				console.log("No downloadUrl provided by db");
+				throw new Error("No downloadUrl provided by db");
 			} else {
 				const fileGlob = getFileIdFromUrl(response.data.image);
 				// const oldImageDetails = {
@@ -123,14 +122,13 @@ function EditProductPage() {
 			const response = await productService.put(
 				id,
 				productData,
-				oldImage
+				oldImage,
 			);
-			console.log(response);
 			navigate(`/store/product/${id}`);
 		} catch (error) {
 			window.scroll({ top: 0, left: 0, behavior: "smooth" });
 			setTimeout(() => {
-				setLoading(false), 1000;
+				(setLoading(false), 1000);
 			});
 		}
 	};
