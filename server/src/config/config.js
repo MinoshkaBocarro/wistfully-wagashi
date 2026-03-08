@@ -5,9 +5,9 @@ module.exports = {
 	// Database Envs
 	db: {
 		serviceAccountKey: {
-			private_key: process.FIREBASE_PRIVATE_KEY,
-			project_id: FIREBASE_PROJECT_ID,
-			client_email: FIREBASE_CLIENT_EMAIL,
+			private_key: process.env.FIREBASE_PRIVATE_KEY,
+			project_id: process.env.FIREBASE_PROJECT_ID,
+			client_email: process.env.FIREBASE_CLIENT_EMAIL,
 		},
 	},
 
