@@ -4,7 +4,11 @@ module.exports = {
 
 	// Database Envs
 	db: {
-		serviceAccountKey: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+		serviceAccountKey: {
+			private_key: process.FIREBASE_PRIVATE_KEY,
+			project_id: FIREBASE_PROJECT_ID,
+			client_email: FIREBASE_CLIENT_EMAIL,
+		},
 	},
 
 	// Auth Envs
